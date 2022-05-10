@@ -7,8 +7,10 @@ export default function ProjectList() {
 
 	const [projects, setProjects] = useState([])
 
+	const storedToken = localStorage.getItem('authToken')
+
 	const getAllProjects = () => {
-		axios.get('/api/projects')
+		axios.get('/api/projects', { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
 				console.log(response)
 				setProjects(response.data)
